@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자리 배치도</title>
+  <style>
+    body {
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 24px;
+    }
+
+    .sheet {
+      width: 1400px;
+      margin: 0 auto;
+      background:
+        linear-gradient(to right, #dcdcdc 1px, transparent 1px),
+        linear-gradient(to bottom, #dcdcdc 1px, transparent 1px);
+      background-size: 76px 32px;
+      background-color: #ffffff;
+      position: relative;
+      padding: 28px 24px 40px;
+      box-sizing: border-box;
+      min-height: 520px;
+    }
+
+    .title {
+      position: absolute;
+      top: 8px;
+      left: 700px;
+      transform: translateX(-50%);
+      font-size: 28px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .group {
+      position: absolute;
+      display: flex;
+      gap: 0;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .seat {
+      width: 150px;
+      height: 32px;
+      box-sizing: border-box;
+      border: 2px solid #222;
+      background: #efe3bf;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .seat.empty {
+      background: transparent;
+    }
+
+    .outline-blue {
+      border: 3px solid #2d62ff;
+      background: transparent;
+    }
+
+    .outline-pink {
+      border: 3px solid #e11d8a;
+      background: #efe3bf;
+    }
+
+    .outline-red {
+      border: 3px solid #d22;
+      background: transparent;
+    }
+
+    .teacher {
+      width: 150px;
+      height: 32px;
+      border: 2px solid #222;
+      background: #b7c7e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      position: absolute;
+      left: 305px;
+      top: 330px;
+    }
+
+    .screen {
+      position: absolute;
+      left: 640px;
+      top: 330px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .left-single-top { left: 12px; top: 52px; }
+    .left-two { left: 12px; top: 84px; }
+    .left-four { left: 162px; top: 84px; }
+
+    .mid-left { left: 470px; top: 84px; }
+    .mid-center { left: 620px; top: 84px; }
+    .mid-right { left: 770px; top: 84px; }
+
+    .right-left { left: 1110px; top: 84px; }
+    .right-right { left: 1260px; top: 84px; }
+    .right-empty { left: 1260px; top: 244px; }
+
+    .bottom-red { left: 12px; top: 330px; }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="title"></div>
+
+    <div class="group left-single-top">
+      <div class="seat empty outline-blue"></div>
+    </div>
+
+    <div class="group left-two">
+      <div class="col">
+        <div class="seat outline-pink">조윤</div>
+        <div class="seat">권대현</div>
+      </div>
+    </div>
+
+    <div class="group left-four">
+      <div class="col">
+        <div class="seat">조은결</div>
+        <div class="seat">김성호</div>
+        <div class="seat">한혜경</div>
+        <div class="seat">유지산</div>
+      </div>
+    </div>
+
+    <div class="group mid-left">
+      <div class="col">
+        <div class="seat">이춘우</div>
+        <div class="seat">김민정</div>
+        <div class="seat">진미경</div>
+        <div class="seat">김민정</div>
+      </div>
+    </div>
+
+    <div class="group mid-center">
+      <div class="col">
+        <div class="seat">최준호</div>
+        <div class="seat">박지우</div>
+        <div class="seat">박상우</div>
+        <div class="seat">이종혁</div>
+        <div class="seat">심정호</div>
+      </div>
+    </div>
+
+    <div class="group mid-right">
+      <div class="col">
+        <div class="seat">이서우</div>
+        <div class="seat">박은빈</div>
+        <div class="seat">조용민</div>
+        <div class="seat">김유선</div>
+        <div class="seat">이태경</div>
+      </div>
+    </div>
+
+    <div class="group right-left">
+      <div class="col">
+        <div class="seat">황동건</div>
+        <div class="seat">원가희</div>
+        <div class="seat">김선희</div>
+        <div class="seat">박초롱</div>
+        <div class="seat">채란</div>
+      </div>
+    </div>
+
+    <div class="group right-right">
+      <div class="col">
+        <div class="seat">이상욱</div>
+        <div class="seat">신혜진</div>
+        <div class="seat">한은태</div>
+        <div class="seat">박준하</div>
+        <div class="seat">이민지</div>
+      </div>
+    </div>
+
+    <div class="group right-empty">
+      <div class="seat empty outline-pink"></div>
+    </div>
+
+    <div class="group bottom-red">
+      <div class="seat empty outline-red"></div>
+    </div>
+
+    <div class="teacher">강사</div>
+    <div class="screen">앞쪽 스크린</div>
+  </div>
+</body>
+</html>
