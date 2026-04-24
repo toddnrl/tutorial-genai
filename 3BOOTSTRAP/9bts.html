@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- 위쪽 공간 (스크롤 유도) -->
+  <div class="h-screen flex items-center justify-center">
+    <h1 class="text-3xl font-bold">스크롤 내려 👇</h1>
+  </div>
+
+  <!-- 카드 영역 -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-10 pb-20">
+
+    <!-- 카드 1 -->
+    <div data-aos="fade-up" data-aos-delay="600"
+         class="bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-xl font-bold mb-2">카드 1</h2>
+      <p class="text-gray-500">첫 번째 카드입니다</p>
+    </div>
+
+    <!-- 카드 2 -->
+    <div data-aos="fade-up" data-aos-delay="600"
+         class="bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-xl font-bold mb-2">카드 2</h2>
+      <p class="text-gray-500">두 번째 카드입니다</p>
+    </div>
+
+    <!-- 카드 3 -->
+    <div data-aos="fade-up" data-aos-delay="600"
+         class="bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-xl font-bold mb-2">카드 3</h2>
+      <p class="text-gray-500">세 번째 카드입니다</p>
+    </div>
+
+  </div>
+
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+
+</body>
+</html>
