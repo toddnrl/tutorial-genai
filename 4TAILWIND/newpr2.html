@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <h1>간단 테스트</h1>
+    <button onclick= "showAlert()">ㅂㅌ</button>
+    <button onclick="confirmAlert()">삭제하기</button>
+    <button onclick="stepAlert()">단계 진행</button>
+</body>
+<script>
+    function showAlert(){
+        // console.log("버튼클릭")
+        Swal.fire({
+            title:'안녕하세요!',
+            text :'이건 경고창입니다',
+            icon : 'success',
+            confirmButtonText : '확인'
+        })
+    }
+    function confirmAlert() {
+      Swal.fire({
+        title: '진짜 삭제?',
+        text: "되돌릴 수 없음",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('삭제 완료!');
+        }
+      });
+    }
+    async function stepAlert() {
+        const { value: step1 } = await Swal.fire({
+        title: '1단계',
+        input: 'text'
+        });
+    
+        const { value: step2 } = await Swal.fire({
+        title: '2단계',
+        input: 'text'
+        });
+    
+        Swal.fire(`결과: ${step1}, ${step2}`);
+    }
+</script>
+</html>
