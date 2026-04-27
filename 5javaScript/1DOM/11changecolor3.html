@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="text">색상변경버튼</h1>
+    <button onclick="changeColor()">색상변경</button>
+    <script>
+        function changeColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+
+            const rhexs = r.toString(16).padStart(2, '0');
+            const ghexs = r.toString(16).padStart(2, '0');
+            const bhexs = r.toString(16).padStart(2, '0');
+
+            const finalcolor = "#" + rhexs + ghexs + bhexs;
+
+            document.body.style.backgroundColor = finalcolor;
+        }
+    </script>
+</body>
+</html>

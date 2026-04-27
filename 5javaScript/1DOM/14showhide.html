@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mydiv{
+            display: block;
+            width: 200px;
+            height: 200px;
+            background-color: lightsalmon;
+        }
+    </style>
+</head>
+<body>
+    <h1>Show // Hide</h1>
+    <button onclick="Showhide()">숨겨진 요소 토글</button>
+    <div id="mydiv">이것은 숨겨진 div 요소입니다</div>
+    <script>
+        div.style.display == "none"
+        function Showhide(){
+            
+            const div = document.querySelector("#mydiv");
+
+            if(div.style.display == "none"){
+                div.style.display ="block";
+            }else {
+                div.style.display ="none";
+            }
+        }
+        function Showhide_Bugfix(){
+            const div = document.querySelector("#mydiv");
+            const displaystyle = window.getComputedStyle(div).display;
+
+            if(displaystyle == 'none'){
+                div.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

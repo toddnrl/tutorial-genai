@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="text">색상변경버튼</h1>
+    <button onclick="changeColor()">색상변경</button>
+    <script>
+        document.body.style.backgroundColor = "white";
+        const colors = ["red","blue","green"];
+        let index = 0;
+        function changeColor() {
+            document.body.style.backgroundColor = colors[index++];
+            if(index > 2)
+                index =0;
+        }
+
+        
+    </script>
+</body>
+</html>
