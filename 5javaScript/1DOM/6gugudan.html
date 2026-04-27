@@ -1,0 +1,82 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단</title>
+</head>
+<body>
+    <h1>구구단 출력기</h1>
+    <input type="text" placeholder="단을 입력하세요 (예: 2)" id="input">
+    <button onclick="printgugudan()">출력하기</button>
+    <div id="result">
+        
+    </div>
+    <script>
+        function printgugudan(){
+
+
+            const userinputValueNumber = 
+
+
+            if(isNaN(userinputValue)){
+                const result = document.getElementById('result');
+                result.innerHTML = '<h3>다시 입력하세요</h3>';
+            }
+
+            const userinput = document.getElementById('input'); //돔 반환
+            const userinputValue = userinput.value; //벨류 반환
+            // const userValue = document.getElementById('input').value;  // 한줄로 표현 가능
+            // console.log(userValue);
+
+
+            const result = document.getElementById('result')
+
+            result.innerHTML = '<h3>' + userinputValue + '단</h3>'    
+            for(let i=1; i<=9; i++){
+                // result.innerHTML += userValue + '*' + i + '=' + userinputValue*i + '<br>';
+                result.innerHTML += `${userinputValue} * ${i} = ${userinputValue * i}<br>`;
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단</title>
+</head>
+<body>
+    <h1>구구단 출력기</h1>
+    <input type="text" placeholder="단을 입력하세요 (예: 2)" id="input">
+    <button onclick="printgugudan()">출력하기</button>
+    <div id="result"></div>
+
+    <script>
+        function printgugudan() {
+
+            const userinput = document.getElementById('input');
+            const userinputValue = userinput.value;
+            const userinputValueNumber = Number(userinputValue);
+
+            const result = document.getElementById('result');
+
+            // 🔴 예외 처리 먼저!
+            if (userinputValue === '' || isNaN(userinputValueNumber)) {
+                result.innerHTML = '<h3>다시 입력하세요</h3>';
+                return; // 여기서 함수 종료
+            }
+
+            // ✅ 정상 실행
+            result.innerHTML = `<h3>${userinputValueNumber}단</h3>`;
+
+            for (let i = 1; i <= 9; i++) {
+                result.innerHTML += `${userinputValueNumber} * ${i} = ${userinputValueNumber * i}<br>`;
+            }
+        }
+    </script>
+</body>
+</html>

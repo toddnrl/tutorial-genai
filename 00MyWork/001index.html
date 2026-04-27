@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>미니 웹앱</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+  <header class="bg-white shadow p-5 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-red-600">MiniApp</h1>
+
+    <div id="authButtons">
+      <button onclick="signup()" class="bg-green-500 text-white px-4 py-2 rounded">회원가입</button>
+      <button onclick="login()" class="bg-blue-500 text-white px-4 py-2 rounded">로그인</button>
+    </div>
+
+    <div id="userBox" class="hidden">
+      <span id="welcomeText" class="mr-4 font-bold"></span>
+      <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded">로그아웃</button>
+    </div>
+  </header>
+
+  <main class="text-center py-24">
+    <h2 class="text-4xl font-bold mb-4">회원가입 / 로그인 미니 웹앱</h2>
+    <p id="mainText" class="text-gray-600">로그인하면 환영 메시지가 바뀝니다.</p>
+  </main>
+
+  <script>
+    window.onload = function () {
+      checkLogin();
+    }
+
+    async function signup() {
+      const { value: user } = await Swal.fire({
+        title: '회원가입',
+        html:
+          '<input id="name" class="swal2-input" placeholder="이름">' +
+          '<input id="email" class="swal2-input" placeholder="이메일">' +
+          '<input id="password" type="password" class="swal2-input" placeholder="비밀번호">',
+        confirmButtonText: '가입하기',
+        showCancelButton: true,
+        cancelButtonText: '취소',
+
+        preConfirm: () => {
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+
+          if (!name || !email || !password) {
+            Swal.showValidationMessage('모든 항목을 입력하세요.');
+            return false;
+          }
+
+          if (!email.includes('@')) {
+            Swal.showValidationMessage('이메일 형식이 올바르지 않습니다.');
+            return false;
+          }
+
+          return { name, email, password };
+        }
+      });
+
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+
+        Swal.fire({
+          title: '회원가입 완료!',
+          text: `${user.name}님 가입을 환영합니다.`,
+          icon: 'success'
+        });
+      }
+    }
+
+    async function login() {
+      const savedUser = JSON.parse(localStorage.getItem('user'));
+
+      if (!savedUser) {
+        Swal.fire('회원가입 필요', '먼저 회원가입을 해주세요.', 'warning');
+        return;
+      }
+
+      const { value: loginData } = await Swal.fire({
+        title: '로그인',
+        html:
+          '<input id="loginEmail" class="swal2-input" placeholder="이메일">' +
+          '<input id="loginPassword" type="password" class="swal2-input" placeholder="비밀번호">',
+        confirmButtonText: '로그인',
+        showCancelButton: true,
+        cancelButtonText: '취소',
+
+        preConfirm: () => {
+          const email = document.getElementById('loginEmail').value;
+          const password = document.getElementById('loginPassword').value;
+
+          if (!email || !password) {
+            Swal.showValidationMessage('이메일과 비밀번호를 입력하세요.');
+            return false;
+          }
+
+          return { email, password };
+        }
+      });
+
+      if (loginData) {
+        if (
+          loginData.email === savedUser.email &&
+          loginData.password === savedUser.password
+        ) {
+          localStorage.setItem('isLogin', 'true');
+
+          Swal.fire('로그인 성공!', `${savedUser.name}님 환영합니다.`, 'success');
+          checkLogin();
+        } else {
+          Swal.fire('로그인 실패', '이메일 또는 비밀번호가 틀렸습니다.', 'error');
+        }
+      }
+    }
+
+    function logout() {
+      localStorage.setItem('isLogin', 'false');
+
+      Swal.fire('로그아웃 완료', '다음에 또 만나요!', 'success');
+      checkLogin();
+    }
+
+    function checkLogin() {
+      const savedUser = JSON.parse(localStorage.getItem('user'));
+      const isLogin = localStorage.getItem('isLogin');
+
+      const authButtons = document.getElementById('authButtons');
+      const userBox = document.getElementById('userBox');
+      const welcomeText = document.getElementById('welcomeText');
+      const mainText = document.getElementById('mainText');
+
+      if (savedUser && isLogin === 'true') {
+        authButtons.classList.add('hidden');
+        userBox.classList.remove('hidden');
+
+        welcomeText.innerText = `${savedUser.name}님 로그인 중`;
+        mainText.innerText = `${savedUser.name}님, 다시 오신 걸 환영합니다!`;
+      } else {
+        authButtons.classList.remove('hidden');
+        userBox.classList.add('hidden');
+
+        mainText.innerText = '로그인하면 환영 메시지가 바뀝니다.';
+      }
+    }
+  </script>
+
+</body>
+</html>
