@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #progressbar{
+            width: 100%;
+            background-color: #f5e9e9;
+        }
+        #progress{
+            width: 0%;
+            height: 30px;
+            background-color: #fabcbc;
+        }
+    </style>
+</head>
+<body>
+    <h1>프로그래스</h1>
+
+    <input type="number" id="inputValue">
+    <button onclick="start()">적용</button>
+
+    <div id="progressbar">
+        <div id="progress"></div>
+    </div>
+
+    <script>
+        let width = 0;
+        let interval;
+        function start(){
+            width = 0;
+
+            interval = setInterval(() => {
+                width++;
+
+                document.getElementById("progress").style.width = width + "%";
+
+                if(width >= 100){
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+    </script>
+</body>
+</html>
+

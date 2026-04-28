@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" style="width:100px;height:100px;background:blue; cursor: pointer;"></div>
+
+    <script>
+        let box = document.getElementById("box");
+
+        box.addEventListener("mouseover", () => {
+            box.style.backgroundColor = "red";
+        });
+
+        box.addEventListener("mouseout", () => {
+            box.style.backgroundColor = "green";
+        });
+    </script>
+</body>
+</html>

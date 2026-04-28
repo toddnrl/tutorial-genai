@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>연습</h3>
+    <div id="time">5</div>
+    <button onclick="less()">시작</button>
+
+    <script>
+        let time = 5;
+        let timer;
+        
+        function less(){
+            clearInterval(timer);
+
+            timer = setInterval(() => {
+                
+                
+                time--;
+                if(time <= 0){
+                    document.getElementById("time").innerText = time;
+                    alert("끝");
+                    clearInterval(timer);
+                    return;
+                }
+                document.getElementById("time").innerText = time;
+                
+            }, 1000);
+
+            
+        }
+    </script>
+</body>
+</html>

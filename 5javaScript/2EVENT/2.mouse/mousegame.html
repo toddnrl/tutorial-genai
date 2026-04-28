@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">클릭!</button>
+    <p id="score">0</p>
+
+    <script>
+        let score = 0;
+        let btn = document.getElementById("btn");
+
+        btn.addEventListener("click", () => {
+            score++;
+            document.getElementById("score").innerText = score;
+
+            btn.style.position = "absolute";
+            btn.style.left = Math.random() * 500 + "px";
+            btn.style.top = Math.random() * 500 + "px";
+        });
+    </script>
+</body>
+</html>
+
+<!-- 버튼 클릭하면 색 랜덤 변경
+클릭 횟수 10번 넘으면 “완료”
+마우스 위치 표시 UI
+클릭하면 원 생성 (좌표 기반) -->

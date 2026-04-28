@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #watch{
+            width: 70px;
+            height: 30px;
+            background-color: #bab8b8;
+        }
+        #rec {
+            display: block;
+            width: 70px;
+            height: 30px;
+            background-color: hwb(84 77% 3%);
+        }
+        #reclist {
+            display: block;
+            width: 70px;
+            height: 30px;
+            background-color: hwb(84 60% 3%);
+        }
+    </style>
+</head>
+<body>
+    <h3>스톱워치</h3>
+    <div id="watch">0.0</div>
+    <button onclick="start1()">시작</button>
+    <button onclick="stop1()">정지</button>
+    <h3>기록</h3>
+    <ul id="records"></ul>
+
+    <script src="JS/watch.js"></script>
+</body>
+</html>

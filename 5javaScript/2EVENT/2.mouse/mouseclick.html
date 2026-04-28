@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">클릭</button>
+    <p id="count">0</p>
+
+    <script>
+        let num = 0;
+
+        document.getElementById("btn").addEventListener("click", () => {
+            num++;
+            document.getElementById("count").innerText = num;
+        });
+
+        document.getElementById("btn").addEventListener("click", () => {
+            num++;
+            document.getElementById("count").innerText = num;
+        })
+    </script>
+</body>
+</html>

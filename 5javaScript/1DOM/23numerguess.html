@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #count {
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>숫자 예측 게임</h1>
+    <p>1부터 100 사이의 숫자를 맞춰보세요.</p>
+
+    <input type="number" id="guessInput">
+    <button onclick="checkNumber()">확인</button>
+    <button onclick="resetGame()">다시 시작</button>
+
+    <div id="result">결과가 여기에 나옵니다.</div>
+    <div id="count">시도 횟수: 0</div>
+
+    <script>
+        let answer = Math.floor(Math.random() * 100) + 1;
+        let tryCount = 0;
+
+        function checkNumber(){
+            let guess = Number(document.getElementById("guessInput").value);
+            let result = document.getElementById("result");
+
+            tryCount++;
+
+            document.getElementById("count").innerText = "시도 횟수: " + tryCount;
+
+            if(guess > answer){
+                result.innerText = "더 작은 숫자";
+
+            }else if(guess < answer){
+                result.innerText = "더 큰 숫자";
+
+            }else{
+                result.innerText = "정답";
+            }
+        }
+        function resetGame(){
+            answer = Math.floor(Math.random() * 100) + 1;
+            tryCount = 0;
+
+            document.getElementById("guessInput").value = "";
+            document.getElementById("result").innerText = "결과가 여기에 나옵니다.";
+            document.getElementById("count").innerText = "시도 횟수: 0";
+        }
+    </script>
+    
+
+</body>
+</html>
