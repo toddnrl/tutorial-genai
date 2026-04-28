@@ -5,51 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        table{
-            width: 250px;
-            height: 250px;
-
-            text-align: center;
-            border: 1px solid;
+        table {
+            border-collapse: collapse;
         }
         td {
-            border: 1px solid;
+            padding: 10px;
+            border: 1px solid black;
         }
     </style>
 </head>
 <body>
-    <table id table w>
+    <table>
         <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
+            <td>셀 1</td>
+            <td>셀 2</td>
+            <td>셀 3</td>
         </tr>
         <tr>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
+            <td>셀 4</td>
+            <td>셀 5</td>
+            <td>셀 6</td>
         </tr>
         <tr>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
+            <td>셀 7</td>
+            <td>셀 8</td>
+            <td>셀 9</td>
         </tr>
-        <tr>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-        </tr>
-        
     </table>
-        <button onclick="changeOddCells()">홀수</button>
-        <button onclick="changeevenCells()">짝수</button>
+
+    <button onclick="changeOddCells()">홀수셀 색상 변경</button>
+    <button onclick="changeEvenCells()">짝수셀 색상 변경</button>
+
     <script>
-        function changeOddCells(){
-            if
-            document.body.style.backgroundColor
+        function changeOddCells() {
+            const cells = document.getElementsByTagName('td');
+            // 어?? 우리가 써둔 셀 번호는, 홀수가 짝수 index 셀에 있음.
+            for (let i = 0; i < cells.length; i++) {
+                if (i % 2 == 0) {
+                    // console.log(cells[i]);
+                    cells[i].style.backgroundColor = "lightgreen";
+                }
+            }
         }
-        function changeevenCells(){
-            
+
+        function changeEvenCells() {
+            const cells = document.getElementsByTagName('td');
+            // cells 가 HTMLCollections 라서 일반 Array로 변환하기: Array.from(리스트타입)
+            Array.from(cells).forEach((cell, index) => {
+                if (index % 2 == 1) {
+                    cell.style.backgroundColor = 'lightblue';
+                    // console.log(index, cell);
+                }
+            });
         }
     </script>
 </body>

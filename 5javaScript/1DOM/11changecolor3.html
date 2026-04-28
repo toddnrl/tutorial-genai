@@ -14,11 +14,11 @@
             const g = Math.floor(Math.random() * 256);
             const b = Math.floor(Math.random() * 256);
 
-            const rhexs = r.toString(16).padStart(2, '0');
-            const ghexs = r.toString(16).padStart(2, '0');
-            const bhexs = r.toString(16).padStart(2, '0');
+            const rhex = r.toString(16).padStart(2, '0');
+            const ghex = r.toString(16).padStart(2, '0');
+            const bhex = r.toString(16).padStart(2, '0');
 
-            const finalcolor = "#" + rhexs + ghexs + bhexs;
+            const finalcolor = "#" + rhex + ghex + bhex;
 
             document.body.style.backgroundColor = finalcolor;
         }
