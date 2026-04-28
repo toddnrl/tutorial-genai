@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #dropZone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        .active {
+            border-color: rgb(248, 192, 225);
+            background-color: rgb(242, 200, 229);
+        }
+        </style>
+</head>
+<body>
+    <h2>파일을 드래그해서 넣으세요</h2>
+
+    <div id="dropZone">여기에 파일 놓기</div>
+
+    <ul id="fileList"></ul>
+    <script>
+        let dropZone = document.getElementById("dropZone");
+        let fileList = document.getElementById("fileList");
+
+        dropZone.addEventListener("dragover", (e)=>{
+            e.preventDefault();
+            dropZone.classList.add("active");
+        });
+
+        dropZone.addEventListener("dragleave", ()=>{
+            dropZone.classList.remove("active");
+        });
+
+        dropZone.addEventListener("drop", (e)=>{
+            e.preventDefault();
+            dropZone.classList.remove("active");
+
+            let files = e.dataTransfer.files;
+
+            for(let i = 0; i < files.length; i++){
+                let li = document.createElement("li");
+                li.innerText = files[i].name;
+                fileList.appendChild(li);
+            }
+        })
+    </script>
+</body>
+</html>

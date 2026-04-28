@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>키보드 이벤트</title>
+</head>
+<body>
+
+<h1>키보드를 눌러보세요</h1>
+<p id="result">아직 누른 키 없음</p>
+
+<script>
+document.addEventListener("keydown", function(e){
+    document.getElementById("result").innerText = "누른 키: " + e.key;
+});
+</script>
+
+</body>
+</html>
