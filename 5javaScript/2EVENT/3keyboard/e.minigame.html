@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+        }
+        .dot {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: red;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        #score {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div id="score">점수: 0</div>
+
+<script>
+    let score = 0;
+
+    document.addEventListener("click", (e) => {
+        let dot = document.createElement("div");
+        dot.classList.add("dot");
+
+        dot.style.left = (e.clientX - 15) + "px";
+        dot.style.top = (e.clientY - 15) + "px";
+        
+        document.body.appendChild(dot);
+
+        dot.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            score++;
+            document.getElementById("score").innerText = "점수 :" + score;
+
+            dot.remove();
+        });
+
+    });
+</script>
+</body>
+</html>

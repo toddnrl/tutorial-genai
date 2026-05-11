@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="bg" style="position:fixed; inset:0; background:rgba(0,0,0,0.5);">
+        <div id="modal" style="background:white; padding:20px; margin:100px;">
+            모달 내용
+            <button id="close">
+                모달 닫기
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let bg = document.getElementById("bg");
+        let modal = document.getElementById("modal");
+        let close = document.getElementById("close");
+
+        bg.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+        close.addEventListener("click", () => {
+            bg.style.display = "none";
+        });
+
+        modal.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+
+    </script>
+</body>
+</html>
