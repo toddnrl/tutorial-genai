@@ -9,6 +9,10 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
+def allowed_file(filename):
+    ALLOWED_EXT = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXT
+
 @app.route('/')
 def index():
     return render_template('form.html')
@@ -32,11 +36,13 @@ def upload_file():
     print(file)
     
     filename = file.filename
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    file.save(filepath)
 
-    
-    return "파일 잘 받음"
+    if file and allowed_file(file.filename):
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        return "파일 잘 받음"
+    else:
+        return f"{file.filename} 지원되지 않는 파일"
 
 
 if __name__ == '__main__':

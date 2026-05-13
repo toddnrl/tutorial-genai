@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>상품 조회</h1>
+
+    {% if result %}
+        {% for p in result %}
+            <li>상품코드 : {{ p.id }}, 상품명: {{ p. }}</li>
+        {% endfor %}
+
+    {% else %}
+
+    {% endif %}
+</body>
+</html>
