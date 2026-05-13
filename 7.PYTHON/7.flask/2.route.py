@@ -18,7 +18,7 @@ def show_admin_proflie():
 @app.route('/product')
 @app.route('/product/<int:id>')
 def show_product_proflie(id=0):
-    return f"상품코드: {id} / 상품명 :사과"
+    return f"상품코드: {id} / 상품명 :김지윤 가격: 500원"
 
 if __name__ == '__main__':
     app.run(debug=True)
