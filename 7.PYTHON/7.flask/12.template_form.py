@@ -4,10 +4,10 @@ import os
 app = Flask(__name__)
 
 
-# app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = 'uploads'
 
 
-# os.makedirs(app.config['UPLOAD_FOLDER'])
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 @app.route('/')
 def index():
@@ -32,7 +32,7 @@ def upload_file():
     print(file)
     
     filename = file.filename
-    filepath = os.path.join(app.frgs['UPLOAD_FOLDER'], filename)
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(filepath)
 
     
