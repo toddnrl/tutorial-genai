@@ -62,13 +62,36 @@ def login():
 # 1-4 비밀번호 변경을 눌렀을때 성공적으로 변경되었음을 알려준다
 
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
-    user = session.get('user')
+    user = session.get('user')   # 세션 안에 있는 데이터를 변경 안했음
     if not user :
         return redirect(url_for('home'))
+    message = None
+
     
-    return render_template('profile.html', user=user)
+    if request.method == 'POST':
+
+        new_pw = request.form.get('new_pw')
+
+        for u in users:
+
+                if u['id'] == user['id']:
+
+                    u['pw'] = new_pw
+
+                    # 따라서 세션도 최신화
+                    session['user'] = u # 세션정보 구 -> 신 버전으로 갱신
+
+                    message = "비밀번호가 변경되었습니다."
+                    # return render_template('profile.html', user=user, message=message)
+                    return redirect(url_for('profile'))
+    
+    return render_template(
+        'profile.html',
+        user=session.get('user'),
+        message=message
+    )
 
 
 
