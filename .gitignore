@@ -1,6 +1,11 @@
+.env
+
+
 # 환경 설정
 .vscode
 .DS_Store
 
 # 업로드 파일
 uploads/
+
+.sessions/
