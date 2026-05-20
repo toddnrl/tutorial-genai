@@ -15,3 +15,7 @@ uploads/
 *.db
 *.sqlite
 *.sqlite3
+
+#개발환경파일
+
+*.pyc
