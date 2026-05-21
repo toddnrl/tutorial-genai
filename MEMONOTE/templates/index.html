@@ -9,5 +9,7 @@
     <div>
         <h3>{{ memo.title }}</h3>
         <p>{{ memo.message }}</p>
+
+        <a href="/delete/{{ memo.id }}">삭제하기</a>
     </div>
 {% endfor %}

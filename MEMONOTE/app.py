@@ -48,6 +48,20 @@ def create():
     return redirect('/')
 
 
+@app.route('/delete/<int:memo_id>')
+def delete(memo_id):
+    conn = get_db()
+
+    conn.execute(
+        'DELETE FROM memos WHERE id = ?',
+        (memo_id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/')
+
 
 if __name__ == "__main__":
     init_db()

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, session, url_for
 from dotenv import load_dotenv
 import requests
 import os
@@ -48,6 +48,14 @@ def naver_login():
 
     print(auth_url)
     return redirect(auth_url)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
