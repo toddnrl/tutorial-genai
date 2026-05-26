@@ -10,7 +10,7 @@ user_input = "우리집에 새로운 강아지를 분양했어.. 강아지 이�
 response = requests.post(
     'https://api.openai.com/v1/chat/completions',
     json={
-        'model': 'gpt-3.5-turbo',
+        'model': 'gpt-3.5-turbo', # gpt-4, gpt-4o, gpt-4o-mini, 
         'messages': [
             {'role': 'system', 'content': '너는 나를 잘 도와주는 경력 20년차의 작명가야.'},
             {'role': 'user', 'content': user_input}
@@ -25,5 +25,6 @@ response = requests.post(
 )
 
 data = response.json()
+
 final_response = data['choices'][0]['message']['content']
 print(final_response)
