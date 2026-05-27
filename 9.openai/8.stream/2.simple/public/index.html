@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>스트림 채팅</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #f2f4f7;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 420px;
+            height: 650px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 18px;
+            background: #222;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #chat {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            background: #fafafa;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            border-radius: 16px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .user {
+            margin-left: auto;
+            background: #3b82f6;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .bot {
+            margin-right: auto;
+            background: #e5e7eb;
+            color: #222;
+            border-bottom-left-radius: 4px;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            border-top: 1px solid #ddd;
+        }
+
+        #input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        #send {
+            padding: 0 18px;
+            border: none;
+            border-radius: 12px;
+            background: #3b82f6;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">스트림 채팅</div>
+
+        <div id="chat"></div>
+
+        <div class="input-area">
+            <input type="text" id="input" placeholder="메세지를 입력하세요">
+            <button id="send">전송</button>
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('input');
+        const send = document.getElementById('send');
+        const chat = document.getElementById('chat');
+
+        function scrollToBottom() {
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        send.addEventListener('click', sendMessage);
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            const message = input.value.trim();
+            if (!message) return;
+
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.textContent = message;
+            chat.appendChild(userDiv);
+
+            input.value = '';
+
+            const botDiv = document.createElement('div');
+            botDiv.className = 'message bot';
+            botDiv.textContent = '';
+            chat.appendChild(botDiv);
+
+            scrollToBottom();
+
+            const response = await fetch('/stream', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            });
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+
+            let fullText = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+
+                fullText += chunk;
+                botDiv.textContent = fullText;
+
+                scrollToBottom();
+            }
+        }
+    </script>
+</body>
+
+</html>

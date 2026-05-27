@@ -9,7 +9,7 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-    return send_from_directory('static', index.html)
+    return send_from_directory('static', 'index.html')
 
 @socketio.on('message')
 def handle_message(msg):
