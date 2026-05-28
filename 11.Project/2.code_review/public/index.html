@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,31 +7,76 @@
 </head>
 <body>
     <h1>코드 취약점 분석기</h1>
+
     <form id="codeForm">
-        <textarea id="code" name="code" rows="15" cols="80" placeholder="소스코드를 입력하세요"></textarea><br>
+        <p>GitHub URL 입력</p>
+        <input 
+            type="text" 
+            id="url" 
+            size="100"
+            placeholder="https://github.com/lovehyun/tutorial-python/blob/main/11.security/1.sqli/app_weak.py"
+        >
+
+        <p>또는 소스코드 직접 입력</p>
+        <textarea id="code" rows="15" cols="100" placeholder="소스코드를 입력하세요"></textarea>
+
+        <p>진단할 취약점 유형</p>
+        <select id="vuln_type">
+            <option value="전체">전체</option>
+            <option value="SQL Injection">SQL Injection</option>
+            <option value="XSS">XSS</option>
+            <option value="Command Injection">Command Injection</option>
+            <option value="Path Traversal">Path Traversal</option>
+            <option value="하드코딩된 비밀번호/API 키">하드코딩된 비밀번호/API 키</option>
+            <option value="인증/인가 취약점">인증/인가 취약점</option>
+            <option value="파일 업로드 취약점">파일 업로드 취약점</option>
+            <option value="CSRF">CSRF</option>
+        </select>
+
+        <br><br>
         <button type="submit">분석시작</button>
     </form>
+
+    <h2>가져온 소스코드</h2>
+    <pre id="source"></pre>
+
     <h2>분석 결과</h2>
-    <pre id="result"><!--결과가 출력될곳--></pre>
+    <pre id="result"></pre>
+-*+
     <script>
         document.getElementById('codeForm').addEventListener('submit', async (ev) => {
             ev.preventDefault();
+
+            const url = document.getElementById('url').value;
             const code = document.getElementById('code').value;
+            const vuln_type = document.getElementById('vuln_type').value;
+
+            const source = document.getElementById('source');
             const result = document.getElementById('result');
 
-            // 1. fetch 로 POST로 소스코드 내용을 다 보낸다. application/json 으로 보낸다.
-            const response = await fetch("/api/codecheck", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                // body: JSON.stringify({ code: code })  // 원래 문법은 key, value 각각 써야 하나.. JS가 아래처럼 축약 표현을 지원함
-                body: JSON.stringify({ code })
-            });
-            const data = await response.json();
-            console.log(data);
+            result.innerText = "분석 중입니다...";
+            source.innerText = "";
 
-            // 2. 결과를 받아와서 result에 출력한다.
+            const response = await fetch("/api/codecheck", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    url,
+                    code,
+                    vuln_type
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                result.innerText = data.error;
+                return;
+            }
+
+            source.innerText = data.code;
             result.innerText = data.result;
-        })
+        });
     </script>
 </body>
 </html>
