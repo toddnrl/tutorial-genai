@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnableLambda
 
 load_dotenv()
 
@@ -16,7 +17,7 @@ prompt = ChatPromptTemplate.from_messages([
 
 ])
 
-chain = prompt | llm | parser   # << = 이걸 LCEL라고 부른다
+chain = prompt | llm | parser | RunnableLambda(lambda x: {'response': x})  # << = 이걸 LCEL라고 부른다
 
 
 inputs = {'company': 'ai 첨단 기술 회사', 'product': '화장품'}
