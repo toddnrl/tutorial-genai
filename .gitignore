@@ -15,7 +15,13 @@ uploads/
 *.db
 *.sqlite
 *.sqlite3
+chroma_db/
+
 
 #개발환경파일
-
 *.pyc
+
+
+# data
+history.json
+*.pdf
