@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>챗봇</title>
+</head>
+<body>
+
+<h1>{{ username }}님의 챗봇</h1>
+
+<div id="chatBox"></div>
+
+<input type="text" id="messageInput" placeholder="메시지를 입력하세요">
+<button id="sendBtn">전송</button>
+
+<br><br>
+<a href="/logout">로그아웃</a>
+
+<script>
+    const chatBox = document.getElementById("chatBox");
+    const messageInput = document.getElementById("messageInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    sendBtn.addEventListener("click", async () => {
+        const message = messageInput.value;
+
+        if (!message) {
+            return;
+        }
+
+        chatBox.innerHTML += `<p><b>나:</b> ${message}</p>`;
+        messageInput.value = "";
+
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: message
+            })
+        });
+
+        const data = await response.json();
+
+        chatBox.innerHTML += `<p><b>AI:</b> ${data.reply}</p>`;
+    });
+</script>
+
+</body>
+</html>
+
