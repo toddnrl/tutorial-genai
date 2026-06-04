@@ -25,7 +25,11 @@ agent = create_agent(llm, [send_payment, get_balance], checkpointer=checkpoint, 
 
 config = {"configurable": {"thread_id": "t001"}}
 
-question = "bob에게 1만원을 송금해."
+recipient = input("받는 사람: ").strip()
+amount = int(input("송금 금액: ").strip())
+
+question = f"{recipient}에게 {amount}원을 송금해."
+
 
 print(f"[유저] {question}")
 result = agent.invoke({"messages": [("user", question)]}, config=config)
@@ -57,7 +61,7 @@ else:
 
         fixed = AIMessage(content=ai_msg.content, tool_calls=[edited], id=ai_msg.id)
         agent.update_state(config, {"messages": [fixed]})
-        print(f"사람이 수정했음 10000 -> {new_amount}")
+        print(f"사람이 수정했음 {args['amount']} -> {new_amount}")
 
     # 3. 다시 이어서 실행한다.
     result = agent.invoke(None, config=config)  # 할일을 계속 이어서 하시오

@@ -47,3 +47,5 @@ index.add(embeddings)
 print("벡터 저장 완료")
 print("저장된 문서 개수:", index.ntotal)
 
+
+
