@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>AI 면접관</h1>
+    <p>자기소개서를 입력하면 AI가 면접 질문을 만들어줌</p>
+    
+    <form method="POST">
+        <textarea name="resume" placeholder="자기소개서 입력" rows="10" cols="60"></textarea>
+        <br><br>
+
+        <button type="submit">
+            질문 생성
+        </button>
+    </form>
+
+    {% if questions %}
+        <hr>
+        <h2>생성된 면접 질문</h2>
+        <pre>{{ questions }}</pre>
+        <h2>답변 입력: </h2>
+
+        <form method="POST" action="/answer">
+            <input type="hidden" name="questions" value="{{ questions }}">
+            <textarea name="answer" placeholder="면접 답변을 입력하세요" rows="10" cols="60"></textarea>
+            
+            <br><br>
+
+            <button type="submit">답변 평가</button>
+        </form>
+    {% endif %}
+
+</body>
+</html>
